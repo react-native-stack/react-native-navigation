@@ -11,19 +11,22 @@ import static android.view.View.TRANSLATION_Y;
 
 public class PeekingAnimator {
 
-    final View view;
+    final Animator animator;
 
     public PeekingAnimator(View view) {
-        this.view = view;
+        this.animator = createAnimator(view);
+    }
+
+    public void addListener(Animator.AnimatorListener listener) {
+        this.animator.addListener(listener);
     }
 
     public void animate() {
-        final Animator animator = createAnimator();
         animator.start();
     }
 
     @NonNull
-    private Animator createAnimator() {
+    private Animator createAnimator(View view) {
         final int heightPixels = view.getLayoutParams().height;
 
         // TODO use VisibilityAnimator?
